@@ -1,26 +1,117 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+/* @plugin "daisyui"; */
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme  {
+  --color-darkBlue: #002e6e;
+  --color-lightBlue: #00b9f1;
+  --color-flameRed: #ef4e28;
+
+  --color-primary-50: #E1E8EF,
+  --color-primary-100: #D4DEE7,
+  --color-primary-200: #B7C7D7,
+  --color-primary-300: #99B0C7,
+  --color-primary-400: #7C99B6,
+  --color-primary-500: #5E82A6,
+  --color-primary-600: #4C6B8A,
+  --color-primary-700: #3C546C,
+  --color-primary-800: #2C3D4F,
+  --color-primary-900: #1B2631,
+  --color-primary-950: #141C24
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer components {
+  .spinner {
+    margin: 3.2rem auto 1.6rem;
+    width: 60px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 8px solid #1B2631;
+    border-right-color: #B7C7D7;
+    animation: rotate 1s infinite linear;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  .spinner-mini {
+    margin: 0;
+    width: 20px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 2px solid #B7C7D7;
+    border-right-color: transparent;
+    animation: rotate 1s infinite linear;
+  }
+
+  @keyframes rotate {
+    to {
+      transform: rotate(1turn);
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .animate-fade-zoom-out {
+    animation: fade-zoom-out 0.5s linear forwards;
+  }
+  @keyframes fade-zoom-out {
+    0% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+  }
+
+  .animate-unfade-zoom-in {
+    animation: unfade-zoom-in 0.5s linear forwards;
+  }
+  @keyframes unfade-zoom-in {
+    0% {
+      transform: scale(0.5);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  .scrollbar::-webkit-scrollbar {
+    height: 8px;
+    /* background: #000; */
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    /* -webkit-box-shadow: inset 0px 0px 6px rgba(0, 0, 0, 0.3);
+    background: #f4f4f4;
+    border-radius: 100vh; */
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    /* background: #e0cbcb; */
+    border-radius: 100vh;
+    /* border: 3px solid #f6f7ed; */
+
+    /* background: #1baaae;
+    background-image: -webkit-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.5) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.5) 50%,
+      rgba(255, 255, 255, 0.5) 75%,
+      transparent 75%
+    ); */
+
+    background-image: linear-gradient(to right, #1baaae, #6dc1c3, #1baaae);
+
+    /* background-image: url('https://i.pinimg.com/originals/b5/2e/1b/b52e1bff41122d66aac6133d5718b6fb.gif'),
+      linear-gradient(100deg, transparent, transparent);
+    background-repeat: no-repeat;
+    background-size: contain; */
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    /* background: #c0a0b9; */
+  }
 }
