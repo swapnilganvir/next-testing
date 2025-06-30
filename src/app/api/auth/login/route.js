@@ -5,7 +5,7 @@ import { createToken } from '@/lib/server-utils';
 export async function POST(req) {
   const { email, password } = await req.json();
   try {
-    const [result] = await db.query('SELECT * FROM student where email = ?', [
+    const [result] = await db.query('SELECT * FROM students where email = ?', [
       email,
     ]);
     const user = result[0];
