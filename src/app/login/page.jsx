@@ -24,8 +24,8 @@ export default function LoginPage() {
 
       const { data } = await axios.post('/api/auth/login', { email, password });
 
-      router.push('/dashboard');
       if (data.success) {
+        router.push('/dashboard');
         rememberUser();
       } else {
         console.log(data);
@@ -84,7 +84,7 @@ export default function LoginPage() {
                 autoComplete="new-password"
                 autoCorrect="off"
                 spellCheck="false"
-                placeholder="New password"
+                placeholder="Password"
                 {...register('password', {
                   required: 'Required',
                   minLength: {

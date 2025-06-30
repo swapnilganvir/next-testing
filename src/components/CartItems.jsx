@@ -1,56 +1,16 @@
 'use client';
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { StoreContext } from '@/context/StoreContext';
 import { useRouter } from 'next/navigation';
 
 const CartItems = () => {
-  const [cart, setCart] = useState([]);
   const { myCart, removeFromCart } = useContext(StoreContext);
+
   const router = useRouter();
 
-  function getCart() {
-    const value = JSON.parse(localStorage.getItem('cart')) || [];
-    setCart(value);
-    // console.log('mycart', value);
+  function checkOut() {
+    router.push('/checkout');
   }
-
-  function getCookie(name) {
-    const cookies = document.cookie.split('; ');
-    for (let c of cookies) {
-      const [key, value] = c.split('=');
-      if (key === name) {
-        return JSON.parse(decodeURIComponent(value));
-      }
-    }
-    return null;
-  }
-
-  async function checkOut() {
-    const user = getCookie('user');
-
-    if (!user) {
-      sessionStorage.setItem('cartToSync', JSON.stringify(cart));
-      router.push('/login');
-      return;
-    }
-    try {
-      const res = await fetch('/api/checkout', {
-        method: 'POST',
-        body: JSON.stringify({ user, cart }),
-      });
-      const msg = await res.json();
-      console.log(msg);
-
-      localStorage.removeItem('cart');
-      router.push('/dashboard');
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  useEffect(() => {
-    getCart();
-  }, []);
 
   return (
     <div className="w-full max-w-4xl mx-auto mt-20 px-4 font-medium">
