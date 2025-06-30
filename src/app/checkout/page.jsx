@@ -12,7 +12,7 @@ import { FaRegEye } from 'react-icons/fa';
 import { GoEyeClosed } from 'react-icons/go';
 import { StoreContext } from '@/context/StoreContext';
 
-export default function LoginPage() {
+export default function CheckoutPage() {
   const [showPassword, setShowPassword] = useState(false);
   const { register, handleSubmit, getValues } = useForm();
   // const { errors } = formState;
@@ -25,8 +25,8 @@ export default function LoginPage() {
 
       const { data } = await axios.post('/api/auth/login', { email, password });
 
-      // router.push('/dashboard');
       if (data.success) {
+        // router.push('/dashboard');
         // rememberUser();
       } else {
         console.log(data);

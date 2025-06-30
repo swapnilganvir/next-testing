@@ -6,6 +6,7 @@ import { FaShoppingCart } from 'react-icons/fa';
 import { HiOutlineMenu } from 'react-icons/hi';
 import { useContext } from 'react';
 import { StoreContext } from '@/context/StoreContext';
+import HoverMenu from './HoverMenu';
 
 const logo_img = '/uncram-logo-final.webp';
 
@@ -53,14 +54,7 @@ const Navbar = () => {
             )}
           </div>
 
-          <Link href="/course">
-            <button
-              className="hidden md:block font-semibold rounded-full px-4 py-2 bg-darkBlue text-white hover:bg-white hover:text-darkBlue
-            border-1 hover:border-darkBlue cursor-pointer"
-            >
-              Co
-            </button>
-          </Link>
+          <HoverMenu />
 
           <Link href="/login">
             <button
