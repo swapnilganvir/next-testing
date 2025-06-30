@@ -18,6 +18,7 @@ import {
   getLocalStorage,
   setLocalStorage,
 } from '@/lib/client-utils';
+import { useRouter } from 'next/navigation';
 
 export const StoreContext = createContext(null);
 
@@ -67,6 +68,8 @@ const StoreContextProvider = props => {
   const [myProducts, setMyProducts] = useState([]);
   const [user, setUser] = useState(initialUser);
 
+  const router = useRouter();
+
   async function rememberUser() {
     const { data } = await axios.get('api/auth/remember');
     try {
@@ -88,6 +91,7 @@ const StoreContextProvider = props => {
     try {
       const { data } = await axios.get('api/auth/logout');
       console.log(data);
+      router.push('/login');
       setUser(initialUser);
     } catch (error) {
       console.log('error', error);

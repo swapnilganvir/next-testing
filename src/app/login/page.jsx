@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { FaPhone } from 'react-icons/fa';
 import { FaLock } from 'react-icons/fa';
+import { HiMail } from 'react-icons/hi';
 import { FaRegEye } from 'react-icons/fa';
 import { GoEyeClosed } from 'react-icons/go';
 import { StoreContext } from '@/context/StoreContext';
@@ -19,8 +20,7 @@ export default function LoginPage() {
 
   async function Login() {
     try {
-      const email = 'swapnilganvir54@gmail.com';
-      const { password } = getValues();
+      const { email, password } = getValues();
 
       const { data } = await axios.post('/api/auth/login', { email, password });
 
@@ -54,19 +54,19 @@ export default function LoginPage() {
           <div className="mb-3">
             <div className="flex items-center">
               <div className="p-2">
-                <FaPhone size={12} />
+                <HiMail size={12} />
               </div>
               <input
-                id="mobile"
+                id="email"
                 type="text"
-                placeholder="Contact"
-                onInput={e => {
-                  e.target.value = e.target.value.replace(/[^0-9]/g, '');
-                }}
-                {...register('mobile', {
-                  required: 'Required',
-                  validate: val =>
-                    val.length === 10 || 'Please enter 10 digit mobile number',
+                defaultValue=""
+                placeholder="Email ID"
+                {...register('email', {
+                  required: 'Please enter a valid Email',
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
+                    message: 'Please enter a valid Email',
+                  },
                 })}
                 className="w-full outline-none text-sm px-2 py-1 border-y-1 border-t-stone-100 border-b-stone-300 rounded-xs"
               />
