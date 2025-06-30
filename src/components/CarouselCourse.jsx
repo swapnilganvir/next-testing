@@ -1,11 +1,14 @@
 'use client';
-import { useContext, useEffect, useRef } from 'react';
-import { StoreContext } from '../_context/StoreContext';
+import { useContext, useEffect, useState, useRef } from 'react';
+import { StoreContext } from '@/context/StoreContext';
 import Link from 'next/link';
 
 const CarouselCourse = () => {
   const carouselRef = useRef(null);
-  const { courses, cartItems } = useContext(StoreContext);
+  const [showScrollButton, setShowScrollButton] = useState(false);
+  const { courses } = useContext(StoreContext);
+
+  const cartItems = [];
 
   function insideCart(id) {
     return cartItems.filter(c => c.id === id).length > 0 ? true : false;
@@ -13,7 +16,8 @@ const CarouselCourse = () => {
 
   function scrollRight() {
     // console.log(
-    //   carouselRef.current.scrollLeft + carouselRef.current.clientWidth,
+    //   carouselRef.current.scrollLeft,
+    //   carouselRef.current.clientWidth,
     //   carouselRef.current.scrollWidth
     // );
 
@@ -22,11 +26,33 @@ const CarouselCourse = () => {
     }
   }
 
+  useEffect(() => {
+    const container = carouselRef.current;
+
+    const checkScroll = () => {
+      // console.log(
+      //   container.scrollLeft,
+      //   container.clientWidth,
+      //   container.scrollWidth
+      // );
+
+      const scrollable = container.clientWidth + 5 < container.scrollWidth;
+      setShowScrollButton(scrollable);
+    };
+
+    checkScroll();
+    window.addEventListener('resize', checkScroll);
+
+    return () => {
+      window.removeEventListener('resize', checkScroll);
+    };
+  }, []);
+
   return (
     <div className="relative">
       <div
         ref={carouselRef}
-        className="flex space-x-4 overflow-x-auto scrollbar"
+        className="flex justify-between max-sm:flex-wrap sm:overflow-x-auto sm:scrollbar"
       >
         {courses.map((course, index) => (
           <Link href={`/course/${course.id}`} key={index}>
@@ -48,12 +74,14 @@ const CarouselCourse = () => {
         <div className="min-w-10"></div>
       </div>
 
-      <button
-        onClick={scrollRight}
-        className="absolute top-1/10 right-[-1px] bg-blue-300 w-10 h-20 rounded cursor-pointer"
-      >
-        &rarr;
-      </button>
+      {showScrollButton && (
+        <button
+          onClick={scrollRight}
+          className="absolute top-1/10 right-[-1px] max-sm:hidden bg-blue-300 w-10 h-20 rounded cursor-pointer"
+        >
+          &rarr;
+        </button>
+      )}
     </div>
   );
 };

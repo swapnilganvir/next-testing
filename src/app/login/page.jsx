@@ -1,31 +1,38 @@
 'use client';
-import Image from 'next/image';
-import React, { useState } from 'react';
+import axios from 'axios';
 import { useForm } from 'react-hook-form';
+import React, { useContext, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { FaPhone } from 'react-icons/fa';
 import { FaLock } from 'react-icons/fa';
 import { FaRegEye } from 'react-icons/fa';
 import { GoEyeClosed } from 'react-icons/go';
+import { StoreContext } from '@/context/StoreContext';
 
-const Login = () => {
+export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
-  const { register, handleSubmit, reset, getValues, formState } = useForm();
-
+  const { register, handleSubmit, getValues } = useForm();
   // const { errors } = formState;
+  const router = useRouter();
+  const { rememberUser } = useContext(StoreContext);
 
-  async function onSubmit() {
-    const email = 'swapnilganvir54@gmail.com';
-    const { password } = getValues();
+  async function Login() {
+    try {
+      const email = 'swapnilganvir54@gmail.com';
+      const { password } = getValues();
 
-    const res = await fetch('/api', {
-      method: 'POST',
-      body: JSON.stringify({ email, password }),
-    });
+      const { data } = await axios.post('/api/auth/login', { email, password });
 
-    const data = await res.json();
-    console.log(data);
-
-    // reset();
+      router.push('/dashboard');
+      if (data.success) {
+        rememberUser();
+      } else {
+        console.log(data);
+      }
+    } catch (error) {
+      console.log('error', error);
+    }
   }
 
   return (
@@ -43,7 +50,7 @@ const Login = () => {
           />
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(Login)}>
           <div className="mb-3">
             <div className="flex items-center">
               <div className="p-2">
@@ -74,6 +81,9 @@ const Login = () => {
               <input
                 id="password"
                 type={showPassword ? 'text' : 'password'}
+                autoComplete="new-password"
+                autoCorrect="off"
+                spellCheck="false"
                 placeholder="New password"
                 {...register('password', {
                   required: 'Required',
@@ -116,6 +126,4 @@ const Login = () => {
       </div>
     </div>
   );
-};
-
-export default Login;
+}

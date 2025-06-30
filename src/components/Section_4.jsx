@@ -4,7 +4,10 @@ const ICIA_logo = '/uncram-test-series-ICAI-logo.webp';
 
 const Section_4 = () => {
   return (
-    <section className="flex flex-col items-center mt-10 mb-10">
+    <section
+      id="faqs"
+      className="flex flex-col items-center mt-10 mb-10 -scroll-mt-100"
+    >
       <div className="w-8/12 max-sm:w-11/12 flex flex-col items-center mb-10">
         <h2 className="text-center text-4xl font-bold mb-5">
           UNCRAM Test Series Results and Reviews
@@ -14,7 +17,7 @@ const Section_4 = () => {
 
       <CarouselReview />
 
-      <div className="w-8/12 max-sm:w-11/12 border-1 border-stone-300 rounded-lg overflow-hidden mb-10">
+      <div className="w-8/12 max-sm:w-11/12 border-1 border-stone-300 rounded-lg overflow-hidden mb-10 scroll-mt-40">
         <h2 className="text-2xl font-semibold p-4 bg-[#dff7ff]">
           Why Test Papers are important for better learning?
         </h2>

@@ -5,7 +5,7 @@ import { FaFacebookSquare } from 'react-icons/fa';
 import { FaTwitter } from 'react-icons/fa';
 import dynamic from 'next/dynamic';
 
-const LocationMap = dynamic(() => import('@/app/_components/LocationMap'), {
+const LocationMap = dynamic(() => import('@/components/LocationMap'), {
   ssr: false,
 });
 
@@ -13,7 +13,7 @@ const Footer = () => {
   return (
     <footer className="mt-10 pb-[5px] bg-[#0e163f] text-white relative">
       <div className="p-10 pb-4">
-        <div className="flex justify-between sm:flex-wrap max-sm:flex-col max-sm:items-center gap-5">
+        <div className="flex justify-between sm:flex-wrap max-sm:flex-col max-sm:items-center gap-10">
           <div className="px-3">
             <h3 className="text-2xl font-semibold mb-1">Quick Links</h3>
             <div className="flex gap-10 text-sm">
@@ -38,7 +38,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="border-l-1 border-r-1 border-stone-600 max-w-80 px-3 mb-5">
+          <div className="border-l-1 border-r-1 border-stone-600 max-w-80 px-3">
             <h3 className="text-2xl font-semibold mb-1">About UNCRAM</h3>
             <div className="text-sm">
               <p>
@@ -55,16 +55,16 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className=" mb-5">
+          <div>
             <LocationMap />
           </div>
         </div>
 
-        <div className="flex flex-col items-center mt-3">
+        <div className="flex flex-col items-center mt-6">
           <h2 className="text-3xl font-medium">Follow Us:</h2>
           <div className="flex gap-4 mt-2">
             <a href="#">
-              <FaInstagram size={30} />
+              <FaInstagram size={31} />
             </a>
             <a href="#">
               <FaFacebookSquare size={30} />

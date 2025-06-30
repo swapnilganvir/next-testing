@@ -1,13 +1,15 @@
+import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
 export async function middleware(req) {
-  console.log('I am middleware!');
+  const cookies2 = await cookies();
 
-  // if ther is an error, then we redirect to error page, then it will redirect login after a timeout
-
-  // return NextResponse.redirect(new URL('/login', req.url));
+  const token = cookies2.get('token')?.value;
+  if (!token) {
+    return NextResponse.redirect(new URL('/login', req.url));
+  }
 }
 
 export const config = {
-  matcher: ['/cart'],
+  matcher: ['/dashboard'],
 };

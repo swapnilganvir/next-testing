@@ -4,7 +4,10 @@ const heart_img = './study-dil-se.png';
 
 const Section_3 = () => {
   return (
-    <section className="flex flex-col items-center px-6 mt-10">
+    <section
+      id="study-plan"
+      className="flex flex-col items-center px-6 mt-10 -scroll-mt-30"
+    >
       <div className="lg:w-6/10 w-8/10 text-center max-sm:p-5 p-10 bg-lime-50 rounded mb-20">
         <p className="text-2xl font-medium">
           Not Claiming Anything!{' '}

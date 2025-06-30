@@ -16,7 +16,10 @@ const Section_5 = () => {
   }
 
   return (
-    <section className="w-7/10 max-lg:w-11/12 mx-auto max-sm:px-2 px-6 mt-20 mb-10">
+    <section
+      id="contact-us"
+      className="w-7/10 max-lg:w-11/12 mx-auto max-sm:px-2 px-6 mt-20 mb-10 scroll-mt-20"
+    >
       <div className="flex max-md:flex-col items-center gap-20">
         <img
           src="/uncram-contact-us-1.webp"

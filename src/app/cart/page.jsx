@@ -1,8 +1,8 @@
-import Navbar from '../_components/Navbar';
-import Footer from '../_components/Footer';
-import CartItems from '../_components/CartItems';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import CartItems from '@/components/CartItems';
 
-export default function Cart() {
+export default function CartPage() {
   return (
     <div>
       <Navbar />
