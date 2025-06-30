@@ -12,15 +12,6 @@ export default function CoursePage() {
         <h2>CA Foundation Test Series, Guranteed 3 Times Revision</h2>
       </div>
 
-      {user.id && (
-        <button
-          onClick={() => logout()}
-          className="bg-green-400 rounded px-2 py-1"
-        >
-          Sign Out
-        </button>
-      )}
-
       <TestSeries
         heading="Chapter wise Test Series"
         courses={myProducts.filter(c => c.test_series_type_id === '2')}
