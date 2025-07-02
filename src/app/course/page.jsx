@@ -3,13 +3,28 @@
 import { useContext } from 'react';
 import { StoreContext } from '@/context/StoreContext';
 
+function capitalize(str) {
+  if (typeof str !== 'string' || !str.length) return '';
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
+
+function discount(price, discount) {
+  const val = price * (1 - 1 / discount);
+  return val.toFixed(2);
+}
+
 export default function CoursePage() {
   const { myProducts, user, logout, addToCart } = useContext(StoreContext);
 
   return (
-    <div>
+    <div className="p-3">
       <div>
-        <h2>CA Foundation Test Series, Guranteed 3 Times Revision</h2>
+        <h2 className="text-lg font-semibold">
+          <span className="text-xl text-lightBlue">
+            CA Foundation Test Series
+          </span>{' '}
+          Guranteed 3 Times Revision
+        </h2>
       </div>
 
       <TestSeries
@@ -29,24 +44,28 @@ export default function CoursePage() {
 
 const TestSeries = ({ heading, courses, addToCart }) => {
   return (
-    <div className="p-3">
+    <div className="mt-3">
       <h2 className="text-xl text-lightBlue font-semibold">{heading}</h2>
-      <div className="flex gap-5 border-1 p-3 border-stone-100">
+      <div className="flex gap-10 border-1 p-8 mt-5 border-stone-300/50">
         {courses.map((c, i) => (
-          <div key={i} className=" bg-gray-100 ">
+          <div key={i} className="w-50 p-2 pb-1 bg-gray-100 rounded-xs">
             <p className="font-semibold">
               {c.main_course_id === '1' ? 'CA' : 'UPSC'}
             </p>
-            <p>{c.remarks}</p>
-            <div className="flex gap-5">
-              <p>price: {c.price}</p>
-              <p>discount: {c.discount}</p>
+            <p className="text-xs text-stone-500 my-2">{c.remarks}</p>
+
+            <div className="flex justify-between text-[10px]">
+              <p className="line-through">₹{c.price} </p>
+              <p>₹{discount(c.price, c.discount)}/-</p>
+              <p className="text-green-400 font-semibold">{c.discount}% off</p>
             </div>
-            <p onClick={() => addToCart(c)}>
-              product_status:
-              <span className="bg-lightBlue text-white">
-                {c.product_status}
-              </span>
+
+            <div className="border-t-1 border-stone-300 mt-3" />
+            <p
+              onClick={() => addToCart(c)}
+              className="text-xs text-lightBlue text-center font-semibold cursor-pointer"
+            >
+              {capitalize(c.product_status)}
             </p>
           </div>
         ))}

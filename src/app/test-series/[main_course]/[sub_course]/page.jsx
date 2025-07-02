@@ -77,7 +77,7 @@ const TestSeries = ({ heading, courses, addToCart }) => {
   return (
     <div className="mt-3">
       <h2 className="text-xl text-lightBlue font-semibold">{heading}</h2>
-      <div className="flex gap-5 border-1 p-8 mt-5 border-stone-300/50">
+      <div className="flex gap-10 border-1 p-8 mt-5 border-stone-300/50">
         {courses.map((c, i) => (
           <div key={i} className="w-50 p-2 pb-1 bg-gray-100 rounded-xs">
             <p className="font-semibold">

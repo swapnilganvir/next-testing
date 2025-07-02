@@ -44,9 +44,11 @@ const Banner = () => {
         </div>
 
         <div className="flex justify-center gap-3 text-white font-medium">
-          <button className="px-4 py-2 bg-lightBlue hover:bg-sky-500 rounded cursor-pointer">
-            Register Now
-          </button>
+          <Link href="/register">
+            <button className="px-4 py-2 bg-lightBlue hover:bg-sky-500 rounded cursor-pointer">
+              Register Now
+            </button>
+          </Link>
 
           <Link href="/login">
             <button className="px-4 py-2 bg-slate-600 hover:bg-slate-700 rounded cursor-pointer">

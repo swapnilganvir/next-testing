@@ -57,12 +57,16 @@ export default function CheckoutPage() {
       </div>
 
       <div className="flex py-3 px-5">
-        <div className="border-1 border-stone-300 pl-2 pr-7 py-1 text-lightBlue">
-          Login (Existing User)
-        </div>
-        <div className="border-1 border-stone-300 pl-2 pr-7 py-1 border-l-0 hover:text-lightBlue">
-          Signup (New User)
-        </div>
+        <Link href="/checkout">
+          <div className="border-1 border-stone-300 pl-2 pr-7 py-1 text-lightBlue cursor-pointer">
+            Login (Existing User)
+          </div>
+        </Link>
+        <Link href="/register">
+          <div className="border-1 border-stone-300 pl-2 pr-7 py-1 border-l-0 hover:text-lightBlue cursor-pointer">
+            Signup (New User)
+          </div>
+        </Link>
       </div>
 
       <div className="flex justify-center">

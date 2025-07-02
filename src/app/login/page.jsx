@@ -4,12 +4,13 @@ import { useForm } from 'react-hook-form';
 import React, { useContext, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { FaPhone } from 'react-icons/fa';
+// import { FaPhone } from 'react-icons/fa';
 import { FaLock } from 'react-icons/fa';
 import { HiMail } from 'react-icons/hi';
 import { FaRegEye } from 'react-icons/fa';
 import { GoEyeClosed } from 'react-icons/go';
 import { StoreContext } from '@/context/StoreContext';
+import Link from 'next/link';
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -119,7 +120,11 @@ export default function LoginPage() {
           <div>
             <label>
               New User
-              <button className="text-lightBlue ml-1">Register</button>
+              <Link href="/register">
+                <button className="text-lightBlue ml-1 cursor-pointer">
+                  Register
+                </button>
+              </Link>
             </label>
           </div>
         </div>

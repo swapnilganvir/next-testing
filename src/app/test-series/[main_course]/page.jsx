@@ -49,11 +49,14 @@ export default function MainCoursePage({ params }) {
             <div>
               <FaArrowCircleDown size={16} className="text-blue-600/20" />
             </div>
-            <p className="text-lg font-semibold my-2">
+            <p className="text-lg text-blue-950 font-semibold my-2">
               JOIN {main_course_name} {item.name}
             </p>
-            <Link href={`${main_course}/${item.name.toLowerCase()}`}>
-              <button className="text-[9px] w-full mb-4 border-1 border-blue-600/40 rounded">
+            <Link
+              href={`${main_course}/${item.name.toLowerCase()}`}
+              className="w-full"
+            >
+              <button className="w-full text-[9px] mb-4 border-1 border-blue-600/40 rounded">
                 JOIN {main_course_name} {item.name.toUpperCase()} TEST SERIES
               </button>
             </Link>
