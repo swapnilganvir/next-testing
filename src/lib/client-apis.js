@@ -38,9 +38,12 @@ export async function addOrder(user_id, product_ids) {
 // Used for cart functionality
 export async function removeOrder(user_id, product_ids) {
   try {
-    const { data } = await axios.post(`${URL}/api/orders/delete`, {
-      user_id,
-      product_ids,
+    // for delete need to give data in different format
+    const { data } = await axios.delete(`${URL}/api/orders/delete`, {
+      data: {
+        user_id,
+        product_ids,
+      },
     });
     // console.log('remove order', data);
   } catch (error) {
