@@ -1,9 +1,11 @@
 import axios from 'axios';
 
+const URL = 'http://localhost:3000';
+
 // Used for cart functionality
 export async function getProducts() {
   try {
-    const { data } = await axios.get('api/products');
+    const { data } = await axios.get(`${URL}/api/products`);
     return data.success ? data.data : [];
   } catch (error) {
     console.log('error', error);
@@ -13,7 +15,7 @@ export async function getProducts() {
 // Used for cart functionality
 export async function getOrders(user_id) {
   try {
-    const { data } = await axios.post('api/orders/read', { user_id });
+    const { data } = await axios.post(`${URL}/api/orders/read`, { user_id });
     return data.success ? data.data : [];
   } catch (error) {
     console.log('error', error);
@@ -23,7 +25,7 @@ export async function getOrders(user_id) {
 // Used for cart functionality
 export async function addOrder(user_id, product_ids) {
   try {
-    const { data } = await axios.post('/api/orders/create', {
+    const { data } = await axios.post(`${URL}/api/orders/create`, {
       user_id,
       product_ids,
     });
@@ -36,7 +38,7 @@ export async function addOrder(user_id, product_ids) {
 // Used for cart functionality
 export async function removeOrder(user_id, product_ids) {
   try {
-    const { data } = await axios.post('/api/orders/delete', {
+    const { data } = await axios.post(`${URL}/api/orders/delete`, {
       user_id,
       product_ids,
     });

@@ -1,11 +1,11 @@
 'use client';
 import React, { createContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import { FaSchool } from 'react-icons/fa';
-import { FaBuildingColumns } from 'react-icons/fa6';
-import { FaGraduationCap } from 'react-icons/fa';
-import { FaPlaneDeparture } from 'react-icons/fa';
-import { TfiWorld } from 'react-icons/tfi';
+// import { FaSchool } from 'react-icons/fa';
+// import { FaBuildingColumns } from 'react-icons/fa6';
+// import { FaGraduationCap } from 'react-icons/fa';
+// import { FaPlaneDeparture } from 'react-icons/fa';
+// import { TfiWorld } from 'react-icons/tfi';
 import {
   addOrder,
   getOrders,
@@ -22,45 +22,46 @@ import { useRouter } from 'next/navigation';
 
 export const StoreContext = createContext(null);
 
-const courses = [
-  {
-    id: 1,
-    name: 'CA Test Series',
-    icon: FaGraduationCap,
-  },
-  {
-    id: 2,
-    name: 'Class 9-10',
-    icon: FaSchool,
-  },
-  {
-    id: 3,
-    name: 'Class 11',
-    icon: FaSchool,
-  },
-  {
-    id: 4,
-    name: 'Class 12',
-    icon: FaSchool,
-  },
-  {
-    id: 5,
-    name: 'B.Com',
-    icon: FaBuildingColumns,
-  },
+// const courses = [
+//   {
+//     id: 1,
+//     name: 'CA Test Series',
+//     icon: FaGraduationCap,
+//   },
+//   {
+//     id: 2,
+//     name: 'Class 9-10',
+//     icon: FaSchool,
+//   },
+//   {
+//     id: 3,
+//     name: 'Class 11',
+//     icon: FaSchool,
+//   },
+//   {
+//     id: 4,
+//     name: 'Class 12',
+//     icon: FaSchool,
+//   },
+//   {
+//     id: 5,
+//     name: 'B.Com',
+//     icon: FaBuildingColumns,
+//   },
 
-  {
-    id: 6,
-    name: 'IELTS',
-    icon: FaPlaneDeparture,
-  },
-  {
-    id: 7,
-    name: 'Internationals',
-    icon: TfiWorld,
-  },
-];
+//   {
+//     id: 6,
+//     name: 'IELTS',
+//     icon: FaPlaneDeparture,
+//   },
+//   {
+//     id: 7,
+//     name: 'Internationals',
+//     icon: TfiWorld,
+//   },
+// ];
 
+const URL = 'http://localhost:3000';
 const initialUser = { id: null };
 
 const StoreContextProvider = props => {
@@ -71,8 +72,8 @@ const StoreContextProvider = props => {
   const router = useRouter();
 
   async function rememberUser() {
-    const { data } = await axios.get('api/auth/remember');
     try {
+      const { data } = await axios.get(`${URL}/api/auth/remember`);
       if (data?.user?.data?.id) {
         setUser(data?.user?.data);
         console.log({ success: true, message: 'User Logged in' });
@@ -89,7 +90,7 @@ const StoreContextProvider = props => {
     }
 
     try {
-      const { data } = await axios.get('api/auth/logout');
+      const { data } = await axios.get(`${URL}/api/auth/logout`);
       console.log(data);
       router.push('/login');
       setUser(initialUser);
@@ -174,14 +175,13 @@ const StoreContextProvider = props => {
   }, [user]);
 
   const contextValue = {
-    myCart,
-    addToCart,
-    removeFromCart,
-    myProducts,
-    courses,
     user,
     rememberUser,
     logout,
+    myProducts,
+    myCart,
+    addToCart,
+    removeFromCart,
   };
 
   return (

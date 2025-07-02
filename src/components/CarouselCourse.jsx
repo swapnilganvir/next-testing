@@ -1,48 +1,44 @@
 'use client';
-import { useContext, useEffect, useState, useRef } from 'react';
-import { StoreContext } from '@/context/StoreContext';
+import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
+import axios from 'axios';
+import { FaGraduationCap } from 'react-icons/fa';
 
 const CarouselCourse = () => {
+  const [mainCourses, setMainCourses] = useState([]);
+
   const carouselRef = useRef(null);
   const [showScrollButton, setShowScrollButton] = useState(false);
-  const { courses } = useContext(StoreContext);
 
-  const cartItems = [];
+  async function getMainCourses() {
+    try {
+      const { data } = await axios.get('/api/test_series');
 
-  function insideCart(id) {
-    return cartItems.filter(c => c.id === id).length > 0 ? true : false;
+      if (data.success) {
+        setMainCourses(data.data);
+      }
+    } catch (error) {
+      console.log('error', error);
+    }
   }
 
   function scrollRight() {
-    // console.log(
-    //   carouselRef.current.scrollLeft,
-    //   carouselRef.current.clientWidth,
-    //   carouselRef.current.scrollWidth
-    // );
-
     if (carouselRef.current) {
       carouselRef.current.scrollBy({ left: 200, behavior: 'smooth' });
     }
   }
 
-  useEffect(() => {
+  function checkScroll() {
     const container = carouselRef.current;
+    const scrollable = container.clientWidth + 5 < container.scrollWidth;
+    setShowScrollButton(scrollable);
+  }
 
-    const checkScroll = () => {
-      // console.log(
-      //   container.scrollLeft,
-      //   container.clientWidth,
-      //   container.scrollWidth
-      // );
-
-      const scrollable = container.clientWidth + 5 < container.scrollWidth;
-      setShowScrollButton(scrollable);
-    };
+  useEffect(() => {
+    getMainCourses();
 
     checkScroll();
     window.addEventListener('resize', checkScroll);
-
     return () => {
       window.removeEventListener('resize', checkScroll);
     };
@@ -52,22 +48,13 @@ const CarouselCourse = () => {
     <div className="relative">
       <div
         ref={carouselRef}
-        className="flex justify-between max-sm:flex-wrap sm:overflow-x-auto sm:scrollbar"
+        className="flex max-sm:flex-wrap sm:overflow-x-auto sm:scrollbar"
       >
-        {courses.map((course, index) => (
-          <Link href={`/course/${course.id}`} key={index}>
+        {mainCourses.map(item => (
+          <Link href={`/test-series/${item.name.toLowerCase()}`} key={item.id}>
             <div className="size-30 flex flex-col justify-center space-y-3 items-center">
-              {insideCart(course.id) ? (
-                <>
-                  <course.icon size={30} className="text-yellow-300" />
-                  <p className="text-yellow-300 opacity-75">{course.name}</p>
-                </>
-              ) : (
-                <>
-                  <course.icon size={30} fill="white" />
-                  <p className="text-sky-100">{course.name}</p>
-                </>
-              )}
+              <FaGraduationCap size={30} fill="white" />
+              <p className="text-sky-100">{item.name}</p>
             </div>
           </Link>
         ))}
