@@ -45,7 +45,7 @@ export async function PUT(req) {
 
     if (res.affectedRows < 1) {
       return Response.json({
-        success: true,
+        success: false,
         message: 'User not found',
       });
     }
