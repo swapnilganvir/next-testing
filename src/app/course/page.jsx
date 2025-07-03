@@ -20,9 +20,7 @@ export default function CoursePage() {
     <div className="p-3">
       <div>
         <h2 className="text-lg font-semibold">
-          <span className="text-xl text-lightBlue">
-            CA Foundation Test Series
-          </span>{' '}
+          <span className="text-xl text-lightBlue">All Test Series</span>{' '}
           Guranteed 3 Times Revision
         </h2>
       </div>

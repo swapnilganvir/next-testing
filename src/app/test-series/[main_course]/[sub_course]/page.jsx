@@ -1,7 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
 import { useContext } from 'react';
 import { StoreContext } from '@/context/StoreContext';
 
@@ -52,7 +51,7 @@ export default function MainCoursePage({ params }) {
       <div>
         <h2 className="text-lg font-semibold">
           <span className="text-xl text-lightBlue">
-            CA Foundation Test Series
+            {main_course_name} {capitalize(sub_course)} Test Series
           </span>{' '}
           Guranteed 3 Times Revision
         </h2>
