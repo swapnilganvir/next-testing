@@ -31,7 +31,7 @@ export default function MainCoursePage({ params }) {
   return (
     <div className="flex flex-col items-center mt-20 mb-40">
       <h2 className="text-3xl text-darkBlue font-semibold">
-        CA Test Series by UNCRAM
+        {main_course_name} Test Series by UNCRAM
       </h2>
       <h2 className="text-3xl text-darkBlue font-semibold">
         <span className="text-gray-600">3 Times Revision</span> Guaranteed
