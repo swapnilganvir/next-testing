@@ -5,7 +5,7 @@ const URL = 'http://localhost:3000';
 // Used for cart functionality
 export async function getProducts() {
   try {
-    const { data } = await axios.get(`${URL}/api/products`);
+    const { data } = await axios.get(`${URL}/api/internal/product/read`);
     return data.success ? data.data : [];
   } catch (error) {
     console.log('error', error);
