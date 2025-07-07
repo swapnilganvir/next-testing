@@ -5,23 +5,22 @@ html {
   scroll-behavior: smooth;
 }
 
-
-@theme  {
+@theme {
   --color-darkBlue: #002e6e;
   --color-lightBlue: #00b9f1;
   --color-flameRed: #ef4e28;
+  --color-primary-500: #798bff;
+  --color-primary-600: #6576ff;
 
-  --color-primary-50: #E1E8EF,
-  --color-primary-100: #D4DEE7,
-  --color-primary-200: #B7C7D7,
-  --color-primary-300: #99B0C7,
-  --color-primary-400: #7C99B6,
-  --color-primary-500: #5E82A6,
-  --color-primary-600: #4C6B8A,
-  --color-primary-700: #3C546C,
-  --color-primary-800: #2C3D4F,
-  --color-primary-900: #1B2631,
-  --color-primary-950: #141C24
+  --color-primary-50: #e1e8ef;
+  --color-primary-100: #d4dee7;
+  --color-primary-200: #b7c7d7;
+  --color-primary-300: #99b0c7;
+  --color-primary-400: #7c99b6;
+  --color-primary-700: #3c546c;
+  --color-primary-800: #2c3d4f;
+  --color-primary-900: #1b2631;
+  --color-primary-950: #141c24;
 }
 
 @layer components {
@@ -30,8 +29,8 @@ html {
     width: 60px;
     aspect-ratio: 1;
     border-radius: 50%;
-    border: 8px solid #1B2631;
-    border-right-color: #B7C7D7;
+    border: 8px solid var(--color-primary-900);
+    border-right-color: var(--color-primary-200);
     animation: rotate 1s infinite linear;
   }
 
@@ -40,7 +39,7 @@ html {
     width: 20px;
     aspect-ratio: 1;
     border-radius: 50%;
-    border: 2px solid #B7C7D7;
+    border: 2px solid var(--color-primary-200);
     border-right-color: transparent;
     animation: rotate 1s infinite linear;
   }
