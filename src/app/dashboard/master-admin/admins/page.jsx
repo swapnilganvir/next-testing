@@ -8,17 +8,18 @@ import { FaPlus } from 'react-icons/fa6';
 import { FiSearch } from 'react-icons/fi';
 import { IoSettingsOutline } from 'react-icons/io5';
 
-import BackgroundGlow from '@/components/admin/BackgroundGlow';
-import ActionsDropdown from '@/components/admin/ActionsDropdown';
+import BackgroundGlow from '../_components/BackgroundGlow';
+import ActionsDropdown from '../_components/ActionsDropdown';
 
 const [colors] = ['#798bff', '#e5e9f2', '#1ee0ac', '#09c2de'];
 
 export default function page() {
   const [staff, setStaff] = useState([]);
+  const [refresh, setRefresh] = useState(false);
 
   async function getStaff() {
     try {
-      const { data } = await axios.get('/api/internal/staff/read');
+      const { data } = await axios.get('/api/dashboard/master/admin/read');
 
       // console.log(data, 'data');
 
@@ -32,14 +33,14 @@ export default function page() {
 
   useEffect(() => {
     getStaff();
-  }, []);
+  }, [refresh]);
 
   return (
     <div className="p-7 bg-gray-100">
       <div className="flex justify-between items-center pb-7">
         <div>
           <h3 className="font-semibold text-2xl lg:text-3xl leading-tighter tracking-tight text-slate-700 dark:text-white mb-2">
-            Main Course List
+            Admins List
           </h3>
         </div>
 
@@ -53,7 +54,7 @@ export default function page() {
 
           <div className="ms-auto">
             <Link
-              href="/admin/master/add-staff"
+              href="/dashboard/master-admin/add-admin"
               className="flex items-center text-sm font-bold rounded p-2 border border-primary-600 text-white bg-primary-600 hover:bg-primary-700 active:bg-primary-800 transition-all duration-300"
             >
               <FaPlus size={20} />
@@ -106,9 +107,9 @@ export default function page() {
                 <p className="text-sm text-slate-400 font-normal">Password</p>
               </th>
 
-              <th className="py-2 px-2 border-b border-t border-gray-300 dark:border-gray-900 text-start">
+              {/* <th className="py-2 px-2 border-b border-t border-gray-300 dark:border-gray-900 text-start">
                 <p className="text-sm text-slate-400 font-normal">Type</p>
-              </th>
+              </th> */}
 
               <th className="py-2 px-2 last:pe-6 border-b border-t border-gray-300 dark:border-gray-900 text-end">
                 <p className="text-sm text-slate-400 font-normal">Action</p>
@@ -156,7 +157,7 @@ export default function page() {
                   </span>
                 </td>
 
-                <td className="py-4 px-2 first:ps-6 last:pe-6 border-b border-gray-300 dark:border-gray-900 hidden sm:table-cell">
+                {/* <td className="py-4 px-2 first:ps-6 last:pe-6 border-b border-gray-300 dark:border-gray-900 hidden sm:table-cell">
                   <span
                     className={`text-sm font-medium ${
                       user.type === 'admin'
@@ -166,11 +167,11 @@ export default function page() {
                   >
                     {user.type}
                   </span>
-                </td>
+                </td> */}
 
                 <td className="py-4 px-2 first:ps-6 last:pe-6 border-b border-gray-300 dark:border-gray-900 hidden sm:table-cell ">
                   <span className="flex justify-end">
-                    <ActionsDropdown user={user} />
+                    <ActionsDropdown user={user} setRefresh={setRefresh} />
                   </span>
                 </td>
               </tr>

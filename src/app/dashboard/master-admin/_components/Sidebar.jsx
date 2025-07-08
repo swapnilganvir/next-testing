@@ -7,23 +7,24 @@ import { HiOutlineMenu } from 'react-icons/hi';
 import { MdPieChartOutline } from 'react-icons/md';
 import { BsCardText } from 'react-icons/bs';
 import { GoPersonAdd } from 'react-icons/go';
-
 import BackgroundGlow from './BackgroundGlow';
+
+const color = ['#101924'];
 
 const my_links = [
   {
     name: 'Dashboard',
-    link: '/admin/master',
+    link: '/dashboard/master-admin',
     icon: MdPieChartOutline,
   },
   {
-    name: 'Staff',
-    link: '/admin/master/staff',
+    name: 'Admins',
+    link: '/dashboard/master-admin/admins',
     icon: BsCardText,
   },
   {
-    name: 'Add staff',
-    link: '/admin/master/add-staff',
+    name: 'Add admin',
+    link: '/dashboard/master-admin/add-admin',
     icon: GoPersonAdd,
   },
 ];
@@ -34,7 +35,7 @@ export default function Sidebar() {
 
   return (
     <div
-      className={`hidden xl:block w-72 min-h-screen max-h-screen z-10 transition-[width] duration-300 bg-gray-950 border-r-1 border-gray-800
+      className={`hidden xl:block w-72 min-h-screen max-h-screen z-10 transition-[width] duration-300 bg-[#101924] border-r-1 border-gray-800
         ${isCompact ? 'w-[74px]' : ''}
         `}
     >

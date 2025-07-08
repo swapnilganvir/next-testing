@@ -1,23 +1,42 @@
+'use client';
 import React from 'react';
+import Link from 'next/link';
+import axios from 'axios';
 
 import { BsThreeDots } from 'react-icons/bs';
 import { LiaUserEditSolid } from 'react-icons/lia';
 import { FiEye } from 'react-icons/fi';
 import { FiMail } from 'react-icons/fi';
-import { FiShoppingCart } from 'react-icons/fi';
-import { IoBan } from 'react-icons/io5';
-import BackgroundGlow from '../../components/admin/BackgroundGlow';
-import Link from 'next/link';
+// import { FiShoppingCart } from 'react-icons/fi';
+// import { IoBan } from 'react-icons/io5';
+import { IoTrashOutline } from 'react-icons/io5';
+import BackgroundGlow from './BackgroundGlow';
 
 const actions = [
   { name: 'Update Details', icon: LiaUserEditSolid, link: true },
-  { name: 'View Details', icon: FiEye, link: false },
-  { name: 'Send Mail', icon: FiMail, link: false },
-  { name: 'Orders', icon: FiShoppingCart, link: false },
-  { name: 'Suspend', icon: IoBan, link: false },
+  { name: 'Delete', icon: IoTrashOutline, link: false },
 ];
 
-export default function ActionsDropdown({ user }) {
+export default function ActionsDropdown({ user, setRefresh }) {
+  async function removeStaff(id) {
+    try {
+      const { data } = await axios.delete(
+        '/api/dashboard/master/admin/delete',
+        {
+          data: {
+            id,
+          },
+        }
+      );
+      alert(data.message);
+      if (data.success) {
+        setRefresh(prev => !prev);
+      }
+    } catch (error) {
+      console.log('error', error);
+    }
+  }
+
   return (
     <div className="dropdown dropdown-end">
       <div tabIndex={0} role="button">
@@ -32,8 +51,15 @@ export default function ActionsDropdown({ user }) {
             <li key={i}>
               <Link
                 href={
-                  action.link ? `/admin/master/update-staff/${user.id}` : ''
+                  action.link
+                    ? `/dashboard/master-admin/update-admin/${user.id}`
+                    : ''
                 }
+                onClick={() => {
+                  if (action.name === 'Delete') {
+                    removeStaff(user.id);
+                  }
+                }}
                 className="px-5 py-2.5 flex items-center text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 hover:bg-slate-50 hover:dark:bg-gray-900 transition-all duration-300"
               >
                 <span className="mt-0.5">

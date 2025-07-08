@@ -1,5 +1,5 @@
-import Sidebar from '@/components/admin/Sidebar';
-import ProfileDropdown from '@/components/admin/ProfileDropdown';
+import Sidebar from './_components/Sidebar';
+import ProfileDropdown from './_components/ProfileDropdown';
 
 export const metadata = {
   title: 'Uncram Admin Panel',

@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 
 export async function POST(req) {
   try {
-    const { name, email, password, type } = await req.json();
+    const { name, email, password } = await req.json();
 
     const is_valid_email = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
     if (!is_valid_email) {
@@ -19,22 +19,14 @@ export async function POST(req) {
     }
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const types = ['admin', 'teacher'];
-    if (!types.includes(type.toLowerCase())) {
-      return NextResponse.json({
-        success: false,
-        message: 'Invalid staff type',
-      });
-    }
-
     await db.query(
-      `INSERT INTO staff (name, email, password, type) VALUES (?, ?, ?, ?)`,
-      [name, email, hashedPassword, type]
+      `INSERT INTO admins (name, email, password) VALUES (?, ?, ?)`,
+      [name, email, hashedPassword]
     );
 
     return Response.json({
       success: true,
-      message: 'Staff added successfully',
+      message: 'Admin added successfully',
     });
   } catch (error) {
     return NextResponse.json({ success: false, message: error.message });

@@ -29,7 +29,7 @@ export default function LoginPage() {
         router.push('/dashboard');
         rememberUser();
       } else {
-        console.log(data);
+        alert(data.message);
       }
     } catch (error) {
       console.log('error', error);

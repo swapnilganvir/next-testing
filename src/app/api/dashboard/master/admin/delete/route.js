@@ -5,18 +5,18 @@ export async function DELETE(req) {
   try {
     const { id } = await req.json();
 
-    const [res] = await db.query(`DELETE FROM staff WHERE id = ?`, [id]);
+    const [res] = await db.query(`DELETE FROM admins WHERE id = ?`, [id]);
 
     if (res.affectedRows < 1) {
       return Response.json({
         success: false,
-        message: 'Staff not found',
+        message: 'Admin not found',
       });
     }
 
     return Response.json({
       success: true,
-      message: 'Staff deleted successfully',
+      message: 'Admin deleted successfully',
     });
   } catch (error) {
     return NextResponse.json({ success: false, message: error.message });

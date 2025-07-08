@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 
 export async function PUT(req) {
   try {
-    const { id, name, email, password, type } = await req.json();
+    const { id, name, email, password } = await req.json();
 
     let data = {};
 
@@ -32,17 +32,6 @@ export async function PUT(req) {
       data = { ...data, password: hashedPassword };
     }
 
-    const types = ['admin', 'teacher'];
-    if (type) {
-      if (!types.includes(type.toLowerCase())) {
-        return NextResponse.json({
-          success: false,
-          message: 'Invalid staff type',
-        });
-      }
-      data = { ...data, type };
-    }
-
     const query = Object.keys(data)
       .map(key => `${key} = ?`)
       .join(', ');
@@ -50,20 +39,20 @@ export async function PUT(req) {
     values.push(id);
 
     const [res] = await db.query(
-      `UPDATE staff SET ${query} WHERE id = ?`,
+      `UPDATE admins SET ${query} WHERE id = ?`,
       values
     );
 
     if (res.affectedRows < 1) {
       return Response.json({
         success: false,
-        message: 'Staff not found',
+        message: 'Admin not found',
       });
     }
 
     return Response.json({
       success: true,
-      message: 'Staff updated successfully',
+      message: 'Admin updated successfully',
     });
   } catch (error) {
     return NextResponse.json({ success: false, message: error.message });

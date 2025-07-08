@@ -2,57 +2,39 @@
 
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 const [colors] = ['#798bff', '#e5e9f2', '#1ee0ac', '#09c2de'];
 
-export default function page({ params }) {
-  const { id } = React.use(params);
+export default function page() {
   const { register, handleSubmit, getValues, formState, reset } = useForm();
   const { errors, isValid } = formState;
   const route = useRouter();
 
-  async function getStaffById() {
-    try {
-      const { data } = await axios.post('/api/internal/staff/read', { id });
-
-      if (data.success) {
-        const staff = data.data[0];
-        reset(staff);
-      }
-    } catch (error) {
-      console.log('error', error);
-    }
-  }
-
-  async function updateStaff() {
+  async function addStaff() {
     try {
       const staff_info = getValues();
-      const { data } = await axios.put(
-        '/api/internal/staff/update',
+      const { data } = await axios.post(
+        '/api/dashboard/master/admin/create',
         staff_info
       );
+
       // console.log(data, 'data');
 
       alert(data.message);
       if (data.success) {
-        route.push('/admin/master/staff');
+        route.back();
       }
     } catch (error) {
       console.log('error', error);
     }
   }
-
-  useEffect(() => {
-    getStaffById();
-  }, []);
 
   return (
     <div className="p-7 bg-gray-100">
       <div className="flex justify-between items-center pb-7">
         <h3 className="font-semibold text-2xl lg:text-3xl leading-tight tracking-tight text-slate-700 dark:text-white mb-2">
-          Update Staff
+          Add Admin
         </h3>
       </div>
 
@@ -61,10 +43,10 @@ export default function page({ params }) {
           <div className="border rounded-md bg-white border-gray-300 dark:bg-gray-950 dark:border-gray-900">
             <div className="p-5 sm:p-6">
               <h5 className="text-xl text-slate-600 leading-tight font-bold mb-5">
-                Staff Information
+                Admin Information
               </h5>
 
-              <form onSubmit={handleSubmit(updateStaff)}>
+              <form onSubmit={handleSubmit(addStaff)}>
                 <div className="mb-5 last:mb-0">
                   <label
                     htmlFor="name"
@@ -122,7 +104,7 @@ export default function page({ params }) {
                   />
                 </div>
 
-                <div className="mb-5 last:mb-0">
+                {/* <div className="mb-5 last:mb-0">
                   <label
                     htmlFor="type"
                     className="inline-block text-sm font-medium text-slate-700 dark:text-white cursor-pointer mb-2"
@@ -137,7 +119,7 @@ export default function page({ params }) {
                     <option value="admin">Admin</option>
                     <option value="teacher">Teacher</option>
                   </select>
-                </div>
+                </div> */}
 
                 <div className="mb-5 last:mb-0">
                   <button
@@ -145,7 +127,7 @@ export default function page({ params }) {
                       isValid ? 'cursor-pointer' : 'cursor-not-allowed'
                     }`}
                   >
-                    Update Information
+                    Save Information
                   </button>
                 </div>
               </form>

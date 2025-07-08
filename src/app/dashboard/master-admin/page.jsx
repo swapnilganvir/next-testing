@@ -2,8 +2,8 @@
 
 import { TbReport } from 'react-icons/tb';
 
-import DaysFilterDropdown from '@/components/admin/DaysFilterDropdown';
-import StatsCard from '@/components/admin/StatsCard';
+import DaysFilterDropdown from './_components/DaysFilterDropdown';
+import StatsCard from './_components/StatsCard';
 
 const [colors] = ['#798bff', '#e5e9f2'];
 
