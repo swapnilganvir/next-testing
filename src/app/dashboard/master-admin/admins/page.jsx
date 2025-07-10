@@ -261,7 +261,10 @@ export default function page() {
               ))
             ) : (
               <tr>
-                <td colSpan={5} className="text-center py-4 text-lg">
+                <td
+                  colSpan={5}
+                  className="text-center py-4 text-lg dark:text-white"
+                >
                   No result found.
                 </td>
               </tr>

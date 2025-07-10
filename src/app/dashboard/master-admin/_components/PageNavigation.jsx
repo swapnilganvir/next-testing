@@ -43,7 +43,7 @@ export default function PageNavigation({
             : 'hover:bg-slate-100 hover:text-primary-600 active:bg-primary-700 hover:dark:bg-slate-800'
         }`}
         onClick={() => handlePageChange(currentPage + 1)}
-        disabled={currentPage === totalPages}
+        disabled={currentPage >= totalPages}
       >
         Next
       </button>
