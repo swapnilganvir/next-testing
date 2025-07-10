@@ -38,7 +38,7 @@ export default function PageNavigation({
       })}
       <button
         className={`h-9 px-3 sm:px-4 text-sm text-slate-500 tracking-wide border border-slate-200 rounded-e transition-all duration-300 dark:border-slate-900 dark:text-slate-400 ${
-          currentPage === totalPages
+          currentPage >= totalPages
             ? 'cursor-not-allowed'
             : 'hover:bg-slate-100 hover:text-primary-600 active:bg-primary-700 hover:dark:bg-slate-800'
         }`}
