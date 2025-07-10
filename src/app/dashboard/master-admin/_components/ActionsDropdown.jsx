@@ -2,13 +2,8 @@
 import React from 'react';
 import Link from 'next/link';
 import axios from 'axios';
-
 import { BsThreeDots } from 'react-icons/bs';
 import { LiaUserEditSolid } from 'react-icons/lia';
-import { FiEye } from 'react-icons/fi';
-import { FiMail } from 'react-icons/fi';
-// import { FiShoppingCart } from 'react-icons/fi';
-// import { IoBan } from 'react-icons/io5';
 import { IoTrashOutline } from 'react-icons/io5';
 import BackgroundGlow from './BackgroundGlow';
 

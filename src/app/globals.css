@@ -1,4 +1,7 @@
 @import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
 @plugin "daisyui";
 
 html {
@@ -9,8 +12,28 @@ html {
   --color-darkBlue: #002e6e;
   --color-lightBlue: #00b9f1;
   --color-flameRed: #ef4e28;
+
+  /* can use existing color palette to define my palette */
+  /* --color-primary-5: var(--color-blue-500); */
+
+  --color-gray-50: #f7fafc;
+  --color-gray-200: #e5e9f2;
+  --color-gray-300: #dbdfea;
+  --color-gray-400: #b6c6e3;
+  --color-gray-800: #2b3748;
+  --color-gray-900: #1f2b3a;
+  --color-gray-950: #101924;
+  --color-gray-1000: #0d141d;
+
   --color-primary-500: #798bff;
   --color-primary-600: #6576ff;
+
+  --color-slate-50: #f5f7fd;
+  --color-slate-200: #dfe9fe;
+  --color-slate-400: #8094ae;
+  --color-slate-600: #526484;
+  --color-slate-700: #364a63;
+  --color-slate-900: #1c2b46;
 
   --color-primary-50: #e1e8ef;
   --color-primary-100: #d4dee7;

@@ -31,7 +31,7 @@ export default function page() {
   }
 
   return (
-    <div className="p-7 bg-gray-100">
+    <div className="p-7">
       <div className="flex justify-between items-center pb-7">
         <h3 className="font-semibold text-2xl lg:text-3xl leading-tight tracking-tight text-slate-700 dark:text-white mb-2">
           Add Admin
@@ -42,7 +42,7 @@ export default function page() {
         <div className="col-span-12 lg:col-span-6">
           <div className="border rounded-md bg-white border-gray-300 dark:bg-gray-950 dark:border-gray-900">
             <div className="p-5 sm:p-6">
-              <h5 className="text-xl text-slate-600 leading-tight font-bold mb-5">
+              <h5 className="text-xl text-slate-600 dark:text-slate-400 leading-tight font-bold mb-5">
                 Admin Information
               </h5>
 

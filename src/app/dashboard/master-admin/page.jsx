@@ -1,15 +1,11 @@
 'use client';
-
 import { TbReport } from 'react-icons/tb';
-
 import DaysFilterDropdown from './_components/DaysFilterDropdown';
 import StatsCard from './_components/StatsCard';
 
-const [colors] = ['#798bff', '#e5e9f2'];
-
 export default function page() {
   return (
-    <div className="p-7 bg-gray-100">
+    <div className="p-7">
       <div className="flex justify-between items-center pb-7">
         <div>
           <h3 className="font-semibold text-2xl lg:text-3xl leading-tighter tracking-tight text-slate-700 dark:text-white mb-2">

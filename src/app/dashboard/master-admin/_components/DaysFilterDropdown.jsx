@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { FaAngleRight } from 'react-icons/fa';
 import { LuCalendarDays } from 'react-icons/lu';
