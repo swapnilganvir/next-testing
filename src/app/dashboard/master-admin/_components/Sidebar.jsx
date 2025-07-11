@@ -67,7 +67,7 @@ export default function Sidebar() {
           <div key={i} className="py-3">
             <Link
               href={item.link}
-              className="flex items-center gap-3 ps-6 pe-10 font-bold text-sm text-[#6e82a5] hover:text-primary-500"
+              className="flex items-center gap-3 ps-6 pe-10 font-bold text-sm text-slate-600 hover:text-primary-500"
             >
               <span>
                 <item.icon size={22} />

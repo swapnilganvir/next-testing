@@ -12,11 +12,11 @@ export const metadata = {
 
 export default function Layout({ children }) {
   return (
-    <div className="flex h-screen dark:bg-gray-1000">
+    <div className="flex h-screen bg-gray-50 dark:bg-gray-1000">
       <Sidebar />
 
       <div className="flex flex-col flex-1">
-        <div className="flex justify-between h-16 px-1.5 sm:px-8 dark:bg-gray-950 border-b-1 border-gray-200 dark:border-gray-800">
+        <div className="flex justify-between h-16 px-1.5 sm:px-8 bg-white dark:bg-gray-950 border-b-1 border-gray-200 dark:border-gray-800">
           <div className="w-full flex justify-between">
             <div></div>
             <div></div>
@@ -26,7 +26,7 @@ export default function Layout({ children }) {
           </div>
         </div>
 
-        <div className="flex-1 overflow-y-auto bg-gray-50 dark:bg-gray-1000">
+        <div className="flex-1 overflow-y-auto">
           {children}
 
           <div className="w-full min-w-[320px] mt-auto border-y bg-white  border-gray-200 dark:bg-gray-950 dark:border-gray-800 px-1.5 sm:px-5 py-5">

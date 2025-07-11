@@ -28,10 +28,13 @@ html {
   --color-primary-500: #798bff;
   --color-primary-600: #6576ff;
 
+  --color-green-600: #1ee0ac;
+
   --color-slate-50: #f5f7fd;
   --color-slate-200: #dfe9fe;
   --color-slate-400: #8094ae;
-  --color-slate-600: #526484;
+  --color-slate-500: #526484;
+  --color-slate-600: #6e82a5;
   --color-slate-700: #364a63;
   --color-slate-900: #1c2b46;
 
