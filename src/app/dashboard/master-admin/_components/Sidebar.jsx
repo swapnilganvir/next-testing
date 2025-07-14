@@ -8,16 +8,17 @@ import { MdPieChartOutline } from 'react-icons/md';
 import { BsCardText } from 'react-icons/bs';
 // import { GoPersonAdd } from 'react-icons/go';
 import BackgroundGlow from './BackgroundGlow';
+import { usePathname } from 'next/navigation';
 
 const my_links = [
   {
     name: 'Dashboard',
-    link: '/dashboard/master-admin',
+    href: '/dashboard/master-admin',
     icon: MdPieChartOutline,
   },
   {
     name: 'Admins',
-    link: '/dashboard/master-admin/admins',
+    href: '/dashboard/master-admin/admins',
     icon: BsCardText,
   },
 ];
@@ -25,6 +26,7 @@ const my_links = [
 export default function Sidebar() {
   const [isCompact, setIsCompact] = useState(false);
   const toggleSidebar = () => setIsCompact(!isCompact);
+  const pathname = usePathname();
 
   return (
     <div
@@ -66,8 +68,10 @@ export default function Sidebar() {
         {my_links.map((item, i) => (
           <div key={i} className="py-3">
             <Link
-              href={item.link}
-              className="flex items-center gap-3 ps-6 pe-10 font-bold text-sm text-slate-600 hover:text-primary-500"
+              href={item.href}
+              className={`flex items-center gap-3 ps-6 pe-10 font-bold text-sm hover:text-primary-600 ${
+                pathname === item.href ? 'text-primary-500' : 'text-slate-600'
+              }`}
             >
               <span>
                 <item.icon size={22} />
