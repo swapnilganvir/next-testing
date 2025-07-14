@@ -1,10 +1,16 @@
 import { NextResponse } from 'next/server';
-import db from '@/lib/db';
+import { writeFile } from 'fs/promises';
+import path from 'path';
 import bcrypt from 'bcrypt';
+import db from '@/lib/db';
 
 export async function POST(req) {
   try {
-    const { name, email, password } = await req.json();
+    const form = await req.formData();
+    const name = form.get('name');
+    const email = form.get('email');
+    const password = form.get('password');
+    const inputFile = form.get('inputFile');
 
     const is_valid_email = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
     if (!is_valid_email) {
@@ -19,9 +25,19 @@ export async function POST(req) {
     }
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    let image_url = '';
+    if (inputFile) {
+      const bytes = await inputFile.arrayBuffer();
+      const buffer = Buffer.from(bytes);
+      const fileName = `${Date.now()}-${inputFile.name}`;
+      const filePath = path.join(process.cwd(), 'public', 'uploads', fileName);
+      await writeFile(filePath, buffer);
+      image_url = `/uploads/${fileName}`;
+    }
+
     await db.query(
-      `INSERT INTO admins (name, email, password) VALUES (?, ?, ?)`,
-      [name, email, hashedPassword]
+      `INSERT INTO admins (name, email, password, image_url) VALUES (?, ?, ?, ?)`,
+      [name, email, hashedPassword, image_url]
     );
 
     return Response.json({

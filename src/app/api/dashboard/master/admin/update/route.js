@@ -1,10 +1,17 @@
 import { NextResponse } from 'next/server';
-import db from '@/lib/db';
+import { writeFile } from 'fs/promises';
+import path from 'path';
 import bcrypt from 'bcrypt';
+import db from '@/lib/db';
 
 export async function PUT(req) {
   try {
-    const { id, name, email, password } = await req.json();
+    const form = await req.formData();
+    const id = form.get('id');
+    const name = form.get('name');
+    const email = form.get('email');
+    const password = form.get('password');
+    const inputFile = form.get('inputFile');
 
     let data = {};
 
@@ -30,6 +37,16 @@ export async function PUT(req) {
       }
       const hashedPassword = await bcrypt.hash(password, 10);
       data = { ...data, password: hashedPassword };
+    }
+
+    if (inputFile) {
+      const bytes = await inputFile.arrayBuffer();
+      const buffer = Buffer.from(bytes);
+      const fileName = `${Date.now()}-${inputFile.name}`;
+      const filePath = path.join(process.cwd(), 'public', 'uploads', fileName);
+      await writeFile(filePath, buffer);
+      const image_url = `/uploads/${fileName}`;
+      data = { ...data, image_url };
     }
 
     const query = Object.keys(data)

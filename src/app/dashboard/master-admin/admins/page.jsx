@@ -14,6 +14,7 @@ import ActionsDropdown from '../_components/ActionsDropdown';
 import PageSizeSelector from '../_components/PageSizeSelector';
 import PageNavigation from '../_components/PageNavigation';
 import ExcelExporter from '../_components/ExcelExporter';
+import Image from 'next/image';
 
 const [colors] = ['#1ee0ac', '#09c2de'];
 
@@ -215,19 +216,30 @@ export default function page() {
                   </td>
 
                   <td className="py-4 px-2 first:ps-6 last:pe-6 border-b border-gray-300 dark:border-gray-900">
-                    <a href="#" className="flex items-center">
-                      <div
-                        className={`relative flex-shrink-0 flex items-center justify-center text-xs text-white  h-7 w-7 rounded-full font-medium ${
-                          user.id % 2 ? 'bg-primary-600' : 'bg-red-600'
-                        }`}
-                      >
-                        <span>BG</span>
-                      </div>
+                    <div className="flex items-center">
+                      {user.image_url ? (
+                        <span className="relative size-7">
+                          <Image
+                            src={user.image_url}
+                            fill
+                            alt="profile image"
+                            className="object-cover [transform:translateZ(0)]"
+                          />
+                        </span>
+                      ) : (
+                        <span
+                          className={`relative flex-shrink-0 flex items-center justify-center text-xs text-white  h-7 w-7 rounded-full font-medium ${
+                            user.id % 2 ? 'bg-primary-600' : 'bg-red-600'
+                          }`}
+                        >
+                          <span>{user.name[0].toUpperCase()}</span>
+                        </span>
+                      )}
                       <span className="ms-3 block text-xs font-medium text-slate-700 dark:text-white">
                         {user.name}
                         <span className="h-2 w-2 inline-block rounded-full bg-green-600 lg:hidden ms-1"></span>
                       </span>
-                    </a>
+                    </div>
                   </td>
 
                   <td className="py-4 px-2 first:ps-6 last:pe-6 border-b border-gray-300 dark:border-gray-900 hidden sm:table-cell">

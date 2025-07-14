@@ -2,16 +2,23 @@
 
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 const [colors] = ['#798bff', '#e5e9f2', '#1ee0ac', '#09c2de'];
 
 export default function page({ params }) {
   const { id } = React.use(params);
+  const [fileName, setFileName] = useState('');
   const { register, handleSubmit, getValues, formState, reset } = useForm();
   const { errors, isValid } = formState;
   const route = useRouter();
+
+  const handleFileChange = e => {
+    const file = e.target.files[0];
+    if (file) setFileName(file.name);
+    else setFileName('');
+  };
 
   async function getStaffById() {
     try {
@@ -21,6 +28,11 @@ export default function page({ params }) {
 
       if (data.success) {
         const staff = data.data[0];
+        let image_url = staff.image_url;
+        if (image_url) {
+          image_url = image_url.replace('/uploads/', '');
+          setFileName(image_url);
+        }
         reset(staff);
       }
     } catch (error) {
@@ -30,10 +42,18 @@ export default function page({ params }) {
 
   async function updateStaff() {
     try {
-      const staff_info = getValues();
+      const formData = new FormData();
+      formData.append('id', id);
+      formData.append('name', getValues().name);
+      formData.append('email', getValues().email);
+      formData.append('password', getValues().password);
+      if (getValues().inputFile.length > 0) {
+        formData.append('inputFile', getValues().inputFile[0]);
+      }
+
       const { data } = await axios.put(
         '/api/dashboard/master/admin/update',
-        staff_info
+        formData
       );
       // console.log(data, 'data');
 
@@ -142,7 +162,31 @@ export default function page({ params }) {
                 </div> */}
 
                 <div className="mb-5 last:mb-0">
+                  <label className="text-sm font-medium text-slate-700 dark:text-white cursor-pointer mb-2">
+                    Upload Profile
+                  </label>
+                  <div className="relative rounded w-full whitespace-nowrap">
+                    <input
+                      type="file"
+                      id="inputFile"
+                      {...register('inputFile')}
+                      onChange={e => handleFileChange(e)}
+                      className="block relative w-full m-0 opacity-0 h-9 z-2"
+                    />
+                    <label
+                      className="flex items-center absolute top-0 start-0 z-1 w-full text-sm leading-4.5 ps-4 py-2 h-9 text-slate-700 dark:text-white placeholder-slate-300 bg-white dark:bg-gray-950 border border-gray-200 dark:border-gray-800 outline-none focus:border-primary-500 focus:dark:border-primary-600 focus:outline-offset-0 focus:outline-primary-200 focus:dark:outline-primary-950 disabled:bg-slate-50 disabled:dark:bg-slate-950 disabled:cursor-not-allowed rounded-[inherit] transition-all after:-top-px after:-end-px after:-bottom-px after:z-[3] after:h-9 after:text-slate-700 after:dark:text-white after:content-['Browse'] after:flex after:items-center after:bg-gray-100 after:dark:bg-gray-900 after:px-4 after:rounded-e-[inherit] after:border after:border-gray-200 after:dark:border-gray-800"
+                      htmlFor="inputFile"
+                    >
+                      <span className="flex-grow">
+                        {fileName || 'Choose File'}
+                      </span>
+                    </label>
+                  </div>
+                </div>
+
+                <div className="mb-5 last:mb-0">
                   <button
+                    type="submit"
                     className={`relative inline-flex items-center text-center align-middle border transition-all duration-300 whitespace-nowrap border-primary-600 text-white bg-primary-600 hover:bg-primary-700 hover:border-primary-700 text-base font-bold leading-4.5 px-6 py-3 tracking-wide rounded-md ${
                       isValid ? 'cursor-pointer' : 'cursor-not-allowed'
                     }`}
