@@ -1,10 +1,11 @@
 import { NextResponse } from 'next/server';
-import { writeFile } from 'fs/promises';
+import fs, { unlink } from 'fs';
 import path from 'path';
 import bcrypt from 'bcrypt';
 import db from '@/lib/db';
 
 export async function POST(req) {
+  let filePath = '';
   try {
     const form = await req.formData();
     const name = form.get('name');
@@ -27,11 +28,17 @@ export async function POST(req) {
 
     let image_url = '';
     if (inputFile) {
-      const bytes = await inputFile.arrayBuffer();
-      const buffer = Buffer.from(bytes);
       const fileName = `${Date.now()}-${inputFile.name}`;
-      const filePath = path.join(process.cwd(), 'public', 'uploads', fileName);
-      await writeFile(filePath, buffer);
+      filePath = path.join(process.cwd(), 'public', 'uploads', fileName);
+
+      const stream = fs.createWriteStream(filePath);
+      const bufferedImage = await inputFile.arrayBuffer();
+      stream.write(Buffer.from(bufferedImage), error => {
+        if (error) {
+          throw new Error('Saving image failed!');
+        }
+      });
+      stream.end();
       image_url = `/uploads/${fileName}`;
     }
 
@@ -45,6 +52,14 @@ export async function POST(req) {
       message: 'Admin added successfully',
     });
   } catch (error) {
+    // delete created image, if insertion of entry fails
+    if (filePath) {
+      unlink(filePath, err => {
+        if (err) {
+          console.log('Error deleting file.');
+        }
+      });
+    }
     return NextResponse.json({ success: false, message: error.message });
   }
 }

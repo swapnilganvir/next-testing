@@ -13,12 +13,12 @@ import { usePathname } from 'next/navigation';
 const my_links = [
   {
     name: 'Dashboard',
-    href: '/dashboard/master-admin',
+    href: '/master-admin/dashboard',
     icon: MdPieChartOutline,
   },
   {
     name: 'Admins',
-    href: '/dashboard/master-admin/admins',
+    href: '/master-admin/dashboard/admins',
     icon: BsCardText,
   },
 ];

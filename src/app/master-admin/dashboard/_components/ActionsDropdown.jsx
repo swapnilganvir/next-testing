@@ -47,7 +47,7 @@ export default function ActionsDropdown({ user, setRefresh }) {
               <Link
                 href={
                   action.link
-                    ? `/dashboard/master-admin/update-admin/${user.id}`
+                    ? `/master-admin/dashboard/update-admin/${user.id}`
                     : ''
                 }
                 onClick={() => {

@@ -103,7 +103,7 @@ export default function page() {
 
           <div className="ms-auto">
             <Link
-              href="/dashboard/master-admin/add-admin"
+              href="/master-admin/dashboard/add-admin"
               className="flex items-center text-sm font-bold rounded p-2 border border-primary-600 text-white bg-primary-600 hover:bg-primary-700 active:bg-primary-800 transition-all duration-300"
             >
               <FaPlus size={20} />
