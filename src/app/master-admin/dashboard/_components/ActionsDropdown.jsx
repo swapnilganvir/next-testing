@@ -15,14 +15,11 @@ const actions = [
 export default function ActionsDropdown({ user, setRefresh }) {
   async function removeStaff(id) {
     try {
-      const { data } = await axios.delete(
-        '/api/dashboard/master/admin/delete',
-        {
-          data: {
-            id,
-          },
-        }
-      );
+      const { data } = await axios.delete('/api/master/admin/delete', {
+        data: {
+          id,
+        },
+      });
       alert(data.message);
       if (data.success) {
         setRefresh(prev => !prev);

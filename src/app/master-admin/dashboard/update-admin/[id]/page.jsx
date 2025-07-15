@@ -22,7 +22,7 @@ export default function page({ params }) {
 
   async function getStaffById() {
     try {
-      const { data } = await axios.post('/api/dashboard/master/admin/read', {
+      const { data } = await axios.post('/api/master/admin/read', {
         id,
       });
 
@@ -51,10 +51,7 @@ export default function page({ params }) {
         formData.append('inputFile', getValues().inputFile[0]);
       }
 
-      const { data } = await axios.put(
-        '/api/dashboard/master/admin/update',
-        formData
-      );
+      const { data } = await axios.put('/api/master/admin/update', formData);
       // console.log(data, 'data');
 
       alert(data.message);

@@ -29,10 +29,7 @@ export default function page() {
         formData.append('inputFile', getValues().inputFile[0]);
       }
 
-      const { data } = await axios.post(
-        '/api/dashboard/master/admin/create',
-        formData
-      );
+      const { data } = await axios.post('/api/master/admin/create', formData);
       // console.log(data, 'data');
 
       alert(data.message);

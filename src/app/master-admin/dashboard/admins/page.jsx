@@ -73,7 +73,7 @@ export default function page() {
 
   async function getStaff() {
     try {
-      const { data } = await axios.get('/api/dashboard/master/admin/read');
+      const { data } = await axios.get('/api/master/admin/read');
 
       // console.log(data, 'data');
 
