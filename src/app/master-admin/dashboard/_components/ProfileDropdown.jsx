@@ -7,6 +7,8 @@ import { IoSettingsOutline } from 'react-icons/io5';
 import { FaRegMoon } from 'react-icons/fa6';
 import { FiLogOut } from 'react-icons/fi';
 import { FiSun } from 'react-icons/fi';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 const Links = [
   {
@@ -16,11 +18,6 @@ const Links = [
   {
     icon: IoSettingsOutline,
     name: 'Account Setting',
-  },
-
-  {
-    icon: FiLogOut,
-    name: 'Sign out',
   },
 ];
 
@@ -42,6 +39,17 @@ function MyLink({ Icon, name }) {
 
 export default function ProfileDropdown() {
   const [darkMode, setDarkMode] = useState(false);
+  const router = useRouter();
+
+  async function logoutMaster() {
+    try {
+      const { data } = await axios.get('/api/master/auth/logout');
+      // console.log(data);
+      router.push('/master-admin/login');
+    } catch (error) {
+      console.log('error', error);
+    }
+  }
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', darkMode);
@@ -118,14 +126,24 @@ export default function ProfileDropdown() {
                 type="checkbox"
                 checked={darkMode}
                 onChange={() => {}}
-                className="toggle ms-auto h-6 border-gray-200 text-gray-200                 checked:bg-primary-600 checked:text-white dark:border-primary-600"
+                className="toggle ms-auto h-6 border-gray-200 text-gray-200 checked:bg-primary-600 checked:text-white dark:border-primary-600"
               />
             </div>
           </li>
 
           <li className="block border-t border-gray-200 dark:border-gray-800 my-3"></li>
 
-          <MyLink Icon={Links[2].icon} name={Links[2].name} />
+          <li>
+            <button
+              onClick={() => logoutMaster()}
+              className="px-7 py-2.5 flex items-center rounded-[inherit] leading-5 font-medium text-slate-600 dark:text-slate-400 hover:text-primary-500 hover:dark:text-primary-600 transition-all duration-300 cursor-pointer"
+            >
+              <span>
+                <FiLogOut size={18} />
+              </span>
+              <span className="ms-2">Sign out</span>
+            </button>
+          </li>
         </ul>
       </div>
     </div>
